@@ -1,9 +1,16 @@
 import React from 'react';
 import { MDBFooter, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
+import styled from '@emotion/styled/macro';
+
+const StyledFooter = styled(MDBFooter)`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+`;
 
 export default function Footer() {
   return (
-    <MDBFooter className='bg-dark text-center text-white'>
+    <StyledFooter className='bg-dark text-center text-white'>
       <MDBContainer className='p-4 pb-0'>
         <section className='mb-4'>
           
@@ -38,6 +45,6 @@ export default function Footer() {
 		  &nbsp;MarvelComicWiki.com
 		</a>
       </div>
-    </MDBFooter>
+    </StyledFooter>
   );
 }
