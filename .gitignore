@@ -12,7 +12,8 @@
 /build
 
 # keys
-/.config/apikey.properties
+/.config
+apikey.properties
 
 # misc
 .DS_Store
