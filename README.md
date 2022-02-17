@@ -72,5 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Adding your Marvel API Key
 
 Before the wiki is functional, you will need to add a .env file to the repo's root directory on your local machine, then add the lines: 
-REACT_APP_MARVEL_PUB_API_KEY = {your public key here}
-REACT_APP_MARVEL_PRIV_API_KEY = {your private key here}
+REACT_APP_MARVEL_API_PUB_KEY = {your public key here}
+REACT_APP_MARVEL_API_PRIV_KEY = {your private key here}
