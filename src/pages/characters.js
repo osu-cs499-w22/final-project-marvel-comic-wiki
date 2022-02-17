@@ -1,10 +1,18 @@
 import Header from '../components/header';
+import Footer from '../components/footer';
+import styled from '@emotion/styled/macro';
+
+const Title = styled.h1`
+  text-align: center;
+  padding: 10px;
+`;
 
 function Characters() {
   return (
     <div>
 	  <Header></Header>
-      <h1>Characters</h1>
+      <Title>Characters</Title>
+      <Footer></Footer>
     </div>
   );
 }
