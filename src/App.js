@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Home from './pages/home';
+import Characters from './pages/characters';
+import Comics from './pages/comics';
+import Creators from './pages/creators';
+import Events from './pages/events';
+import Series from './pages/series';
+import Error from './pages/error';
+
+const App = () => useRoutes([
+    { path: "/", element: <Home /> },
+    { path: "/home", element: <Home /> },
+    { path: "/characters", element: <Characters /> },
+    { path: "/comics", element: <Comics /> },
+    { path: "/creators", element: <Creators /> },
+    { path: "/events", element: <Events /> },
+    { path: "/series", element: <Series /> },
+    { path: "*", element: <Error /> }
+  ]);
 
 export default App;
