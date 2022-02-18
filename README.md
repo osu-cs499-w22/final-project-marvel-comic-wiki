@@ -15,3 +15,17 @@ This service retrieves data from Marvel's Developer API and provides the user wi
 ```REACT_APP_MARVEL_API_PUB_KEY = {your public key here}```
 <br>
 ```REACT_APP_MARVEL_API_PRIV_KEY = {your private key here}```
+
+## Project Todo List:
+- [x] Create Website Outline
+- [x] Create Header and Footer
+- [x] Connect to Marvel API
+- [x] Display API Data
+- [x] Add Loading Spinner
+- [x] Create Character Modals
+- [ ] Implement Character Search by Name
+- [ ] Implement Pagination for all Characters
+- [ ] Develop Comics Page
+- [ ] Develop Creators Page
+- [ ] Develop Events Page
+- [ ] Develop Series Page
