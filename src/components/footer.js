@@ -3,9 +3,10 @@ import { MDBFooter, MDBContainer, MDBIcon } from 'mdb-react-ui-kit';
 import styled from '@emotion/styled/macro';
 
 const StyledFooter = styled(MDBFooter)`
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	width: 100%;
+	margin-top: 25px;
 `;
 
 const CopyrightLink = styled.a`

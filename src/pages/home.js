@@ -24,6 +24,13 @@ const Information = styled.p`
   padding: 10px;
 `;
 
+const FooterContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25px;
+`;
+
 function Home() {
   return (
     <div>
@@ -32,7 +39,9 @@ function Home() {
       <MarvelImage src="https://wallpapercave.com/wp/wp1829345.jpg" alt="" width="50%"/>
       <Description>This is your one-stop shop for all Marvel related information.</Description>
       <Information>Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in 1961, the year that the company launched The Fantastic Four and other superhero titles created by Stan Lee, Jack Kirby, Steve Ditko and many others. The Marvel brand, which had been used over the years, was solidified as the company's primary brand.</Information>
-	  <Footer></Footer>
+	  <FooterContainer>
+        <Footer></Footer>
+      </FooterContainer>
 	</div>
   );
 }

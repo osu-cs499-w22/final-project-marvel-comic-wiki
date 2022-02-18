@@ -10,7 +10,7 @@ function useMarvelSearch(url) {
   const [ items, setItems ] = useState([]);
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
-  const authUrl = url + `?ts=${TIMESTAMP}&apikey=${PUB_KEY}&hash=${HASH}`;
+  const authUrl = `${url}ts=${TIMESTAMP}&apikey=${PUB_KEY}&hash=${HASH}`;
 
   useEffect(() => {
     let ignore = false;
@@ -24,7 +24,6 @@ function useMarvelSearch(url) {
           { signal: controller.signal }
         );
         responseBody = await response.json();
-		console.log("responseBody:", responseBody);
       } catch (e) {
         if (e instanceof DOMException) {
           console.log("== HTTP request cancelled")
@@ -39,14 +38,15 @@ function useMarvelSearch(url) {
         setItems(responseBody.data.results || []);
       }
     }
-    if (authUrl) {
-      fetchSearchResults()
+    if (url) {
+      fetchSearchResults();
     }
     return () => {
       controller.abort();
       ignore = true;
     }
   }, [ url ]);
+  console.log("items: ", items)
   return [ items, loading, error ];
 }
 
