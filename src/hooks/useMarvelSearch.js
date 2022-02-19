@@ -46,7 +46,6 @@ function useMarvelSearch(url) {
       ignore = true;
     }
   }, [ url ]);
-  console.log("items: ", items)
   return [ items, loading, error ];
 }
 

@@ -25,6 +25,12 @@ const StyledContainer = styled(Container)`
   max-width: 95%;
 `;
 
+const StyledCard = styled(Card)`
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
 const StyledCardBody = styled(Card.Body)`
   display: flex;
   flex-direction: column;
@@ -35,11 +41,6 @@ const StyledCardBody = styled(Card.Body)`
 const StyledCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
-`;
-
-const StyledCardText = styled(Card.Text)`
-  text-align: center;
-  margin-bottom: 0px;
 `;
 
 function Characters() {
@@ -63,24 +64,22 @@ function Characters() {
           <Row className="row-cols-1 row-cols-md-4 g-4">
             {characters.map(character =>
               <Col key={character.id}>
-                <Card onClick={() => {
-                  setCharacterName(`${character.name}`);
-                  setCharacterDescription(`${character.description}`);
+                <StyledCard onClick={() => {
+                  setCharacterName(character.name);
+                  setCharacterDescription(character.description);
                   setCharacterComics(character.comics.items);
                   setCharacterEvents(character.events.items);
                   setCharacterSeries(character.series.items);
-                  
                   setModalShow(true);
                 }}>
                   <img src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     <StyledCardTitle>{character.name}</StyledCardTitle>
                   </StyledCardBody>
-                </Card>
+                </StyledCard>
               </Col>
             )}
           </Row>
-          {console.log("characterComics:", characterComics)};
           <CharacterModal 
             name={characterName}
             description={characterDescription || "Not Available"}
@@ -95,7 +94,7 @@ function Characters() {
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       <Footer></Footer>
     </div>
-  );
+  )
 }
 
 export default Characters;
