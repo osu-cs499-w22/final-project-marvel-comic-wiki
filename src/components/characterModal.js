@@ -1,8 +1,8 @@
 import { Modal, Button, Accordion } from 'react-bootstrap';
 import styled from '@emotion/styled/macro';
 
-const StyledModalHeader = styled(Modal.Header)`
-	text-align: center;
+const StyledModalTitle = styled(Modal.Title)`
+	padding-left: 20px;
 `;
 
 
@@ -13,11 +13,12 @@ export default function CharacterModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+	  scrollable={true}
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <StyledModalTitle id="contained-modal-title-vcenter">
           {props.name}
-        </Modal.Title>
+        </StyledModalTitle>
       </Modal.Header>
       
 	  <Modal.Body>
