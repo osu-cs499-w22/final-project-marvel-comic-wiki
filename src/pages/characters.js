@@ -80,10 +80,12 @@ function Characters() {
 
   useEffect(()=>{ // changes the URL depending on what the user searched for
       if(inputQuery === ''){
+
+        
         setUrl(baseUrl); // use base URL when user doesnt search for a specific character
       }
       else {
-        setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
+        // setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
         
         setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific character
       }
@@ -112,6 +114,7 @@ function Characters() {
       <Title>Characters</Title>
       <StyledForm  onSubmit={(e) => {
         e.preventDefault();
+        setOffset(0);
         setInputQuery(characterToSearch);
       }}>
         <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
