@@ -98,9 +98,7 @@ function Characters() {
       if(inputQuery === ''){
         setUrl(baseUrl); // use base URL when user doesnt search for a specific character
       }
-      else {
-        setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
-        
+      else {        
         setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific character
       }
 
@@ -134,6 +132,7 @@ function Characters() {
           
           <StyledForm onSubmit={(e) => {
             e.preventDefault();
+            setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
             setInputQuery(characterToSearch);
           }}>
           <StyledIcon icon="search"/>
