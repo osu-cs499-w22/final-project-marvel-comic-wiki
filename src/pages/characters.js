@@ -8,17 +8,22 @@ import useMarvelSearch from '../hooks/useMarvelSearch';
 
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled/macro';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { MDBIcon } from "mdb-react-ui-kit";
 
 
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
+  margin-bottom: -42px;
+  @media (max-width: 700px) {
+    margin-bottom: 0px;
+  }
 `;
 
 const Loading = styled.div`
   text-align: center;
-  padding-top: 20px;
+  padding-top: 50px;
 `;
 
 const StyledContainer = styled(Container)`
@@ -30,8 +35,6 @@ const StyledCard = styled(Card)`
     transform: scale(1.05);
   }
 `;
-
-
 
 const StyledCardBody = styled(Card.Body)`
   display: flex;
@@ -46,30 +49,43 @@ const StyledCardTitle = styled(Card.Title)`
 `;
 
 const StyledForm = styled.form`
-
-
-  display:flex;
-  justify-content: flex-end;
-  padding:10px;
-  padding-right: 75px;
-  padding-bottom: 20px;
+  text-align: right;
+  padding-right: 5px;
+  padding-bottom: 25px;
+  @media (max-width: 700px) {
+    text-align: center;
+    padding-right: 0px;
+  }
 `;
 
 const StyledInput = styled.input`
-  border:0;
+  border: 0;
   border-bottom: 1px solid grey;
-  &:focus{
-    outline:none;
+  &:focus {
+    outline: none;
   }
-`
-
-const StyledBtnsContainer = styled.div`
-  display:flex;
-  justify-content: center;
-  margin:20px;
 `;
 
+const StyledIcon = styled(MDBIcon)`
+  margin-right: 5px;
+`;
 
+const StyledBtnsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+`;
+
+const StyledButton = styled(Button)`
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, .125);
+  &:hover {
+    border-color: rgba(0, 0, 0, .125);
+    background-color: #efefef;
+  }
+`;
 
 function Characters() {
 
@@ -109,16 +125,22 @@ function Characters() {
   return (
     <div>
 	  <Header></Header>
+      
       <Title>Characters</Title>
-      <StyledForm  onSubmit={(e) => {
-        e.preventDefault();
-        setInputQuery(characterToSearch);
-      }}>
-        <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
-      </StyledForm>
+      
       {loadingAll ? ( <Loading> <Spinner /> </Loading> ) : (
+        
         <StyledContainer>
-          <Row className="row-cols-1 row-cols-md-4 g-4">
+          
+          <StyledForm onSubmit={(e) => {
+            e.preventDefault();
+            setInputQuery(characterToSearch);
+          }}>
+          <StyledIcon icon="search"/>
+            <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
+          </StyledForm>
+        
+          <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {characters.map(character =>
               
               <Col key={character.id}>
@@ -130,18 +152,16 @@ function Characters() {
                   setCharacterSeries(character.series.items);
                   setModalShow(true);
                 }}>
-
-                  
+                
                   <img src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     <StyledCardTitle>{character.name}</StyledCardTitle>
                   </StyledCardBody>
                 </StyledCard>
-                
-                
               </Col>
             )}
           </Row>
+          
           <CharacterModal 
             name={characterName}
             description={characterDescription || "Not Available"}
@@ -151,14 +171,14 @@ function Characters() {
             show={modalShow} 
             onHide={() => setModalShow(false)} 
           />
+          
+          <StyledBtnsContainer>
+            <StyledButton variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
+            <StyledButton variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+          </StyledBtnsContainer>
+          
         </StyledContainer>
       )}
-      <StyledBtnsContainer>
-      <button onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>Previous page</button>
-      <button onClick={() => setOffset(offset + 1)}>Next page</button>
-      </StyledBtnsContainer>
-
-      
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       <Footer></Footer>
     </div>
