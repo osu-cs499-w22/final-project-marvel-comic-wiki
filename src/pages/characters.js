@@ -31,6 +31,8 @@ const StyledCard = styled(Card)`
   }
 `;
 
+
+
 const StyledCardBody = styled(Card.Body)`
   display: flex;
   flex-direction: column;
@@ -61,9 +63,18 @@ const StyledInput = styled.input`
   }
 `
 
+const StyledBtnsContainer = styled.div`
+  display:flex;
+  justify-content: center;
+  margin:20px;
+`;
+
+
+
 function Characters() {
 
-  const baseUrl = `https://gateway.marvel.com/v1/public/characters?`;
+  const [offset, setOffset] = useState(0);
+  const baseUrl = `https://gateway.marvel.com/v1/public/characters?offset=${offset*20}&`; // marvel api gives characters in 20 character chunks
   const [ inputQuery, setInputQuery] = useState('') 
    const [ url, setUrl] = useState(baseUrl);
 
@@ -72,11 +83,13 @@ function Characters() {
         setUrl(baseUrl); // use base URL when user doesnt search for a specific character
       }
       else {
+        setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
+        
         setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific character
       }
 
 
-    }, [inputQuery])
+    }, [inputQuery, offset])
 
 
   const [ characters, loadingAll, errorAll ] = useMarvelSearch(url);
@@ -89,6 +102,8 @@ function Characters() {
   const [ modalShow, setModalShow ] = React.useState(false);
  
   console.log(characters);
+  console.log("url == ", url);
+  console.log("offset is == ", offset);
   
   
   return (
@@ -138,6 +153,12 @@ function Characters() {
           />
         </StyledContainer>
       )}
+      <StyledBtnsContainer>
+      <button onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>Previous page</button>
+      <button onClick={() => setOffset(offset + 1)}>Next page</button>
+      </StyledBtnsContainer>
+
+      
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       <Footer></Footer>
     </div>
