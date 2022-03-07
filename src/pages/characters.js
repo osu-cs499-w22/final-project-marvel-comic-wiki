@@ -6,7 +6,7 @@ import CharacterModal from '../components/characterModal';
 
 import useMarvelSearch from '../hooks/useMarvelSearch';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
@@ -31,6 +31,8 @@ const StyledCard = styled(Card)`
   }
 `;
 
+
+
 const StyledCardBody = styled(Card.Body)`
   display: flex;
   flex-direction: column;
@@ -43,26 +45,82 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledForm = styled.form`
+
+
+  display:flex;
+  justify-content: flex-end;
+  padding:10px;
+  padding-right: 75px;
+  padding-bottom: 20px;
+`;
+
+const StyledInput = styled.input`
+  border:0;
+  border-bottom: 1px solid grey;
+  &:focus{
+    outline:none;
+  }
+`
+
+const StyledBtnsContainer = styled.div`
+  display:flex;
+  justify-content: center;
+  margin:20px;
+`;
+
+
+
 function Characters() {
 
-  const url = `https://gateway.marvel.com/v1/public/characters?`;
+  const [offset, setOffset] = useState(0);
+  const baseUrl = `https://gateway.marvel.com/v1/public/characters?offset=${offset*20}&`; // marvel api gives characters in 20 character chunks
+  const [ inputQuery, setInputQuery] = useState('') 
+   const [ url, setUrl] = useState(baseUrl);
+
+  useEffect(()=>{ // changes the URL depending on what the user searched for
+      if(inputQuery === ''){
+        setUrl(baseUrl); // use base URL when user doesnt search for a specific character
+      }
+      else {
+        setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
+        
+        setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific character
+      }
+
+
+    }, [inputQuery, offset])
+
+
   const [ characters, loadingAll, errorAll ] = useMarvelSearch(url);
   const [ characterName, setCharacterName ] = useState('');
   const [ characterDescription, setCharacterDescription ] = useState('');
   const [ characterComics, setCharacterComics ] = useState([]);
   const [ characterEvents, setCharacterEvents ] = useState([]);
   const [ characterSeries, setCharacterSeries ] = useState([]);
-  
+  const [ characterToSearch, setCharacterToSearch] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
+ 
+  console.log(characters);
+  console.log("url == ", url);
+  console.log("offset is == ", offset);
+  
   
   return (
     <div>
 	  <Header></Header>
       <Title>Characters</Title>
+      <StyledForm  onSubmit={(e) => {
+        e.preventDefault();
+        setInputQuery(characterToSearch);
+      }}>
+        <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
+      </StyledForm>
       {loadingAll ? ( <Loading> <Spinner /> </Loading> ) : (
         <StyledContainer>
           <Row className="row-cols-1 row-cols-md-4 g-4">
             {characters.map(character =>
+              
               <Col key={character.id}>
                 <StyledCard onClick={() => {
                   setCharacterName(character.name);
@@ -72,11 +130,15 @@ function Characters() {
                   setCharacterSeries(character.series.items);
                   setModalShow(true);
                 }}>
+
+                  
                   <img src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     <StyledCardTitle>{character.name}</StyledCardTitle>
                   </StyledCardBody>
                 </StyledCard>
+                
+                
               </Col>
             )}
           </Row>
@@ -91,6 +153,12 @@ function Characters() {
           />
         </StyledContainer>
       )}
+      <StyledBtnsContainer>
+      <button onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>Previous page</button>
+      <button onClick={() => setOffset(offset + 1)}>Next page</button>
+      </StyledBtnsContainer>
+
+      
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       <Footer></Footer>
     </div>
