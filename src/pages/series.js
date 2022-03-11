@@ -48,6 +48,13 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -155,7 +162,7 @@ function Series() {
                 
                   <img src={`${series.thumbnail.path}/standard_xlarge.${series.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{series.title} </StyledCardTitle>
+                  {series.title.length > 40 ? <StyledLongCardTitle>{series.title}</StyledLongCardTitle> : <StyledCardTitle>{series.title}</StyledCardTitle> }
                   </StyledCardBody>
                 </StyledCard>
               </Col>

@@ -48,6 +48,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -154,7 +160,7 @@ function Comics() {
                 
                   <img src={`${comic.thumbnail.path}/standard_xlarge.${comic.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{comic.title}</StyledCardTitle>
+                    {comic.title.length > 40 ? <StyledLongCardTitle>{comic.title}</StyledLongCardTitle> : <StyledCardTitle>{comic.title}</StyledCardTitle> }
                   </StyledCardBody>
                 </StyledCard>
               </Col>
