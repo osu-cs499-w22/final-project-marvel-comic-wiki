@@ -87,6 +87,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`
+
 function Comics() {
 
   const [offset, setOffset] = useState(0);
@@ -135,7 +142,7 @@ function Comics() {
             setOffset(0); // reset off set when the user choses a specific event so that they get events in order
             setInputQuery(eventToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter an event name ' onChange={e => setEventToSearch(e.target.value)} /> 
           </StyledForm>
         

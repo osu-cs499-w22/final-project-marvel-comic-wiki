@@ -94,6 +94,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`
+
 function Series() {
 
   const [offset, setOffset] = useState(0);
@@ -142,7 +149,7 @@ function Series() {
             setOffset(0); // reset off set when the user choses a specific series so that they get series in order
             setInputQuery(seriesToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a series name ' onChange={e => setSeriesToSearch(e.target.value)} /> 
           </StyledForm>
         

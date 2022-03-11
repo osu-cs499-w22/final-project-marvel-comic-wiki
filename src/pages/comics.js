@@ -93,6 +93,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`
+
 function Comics() {
 
   const [offset, setOffset] = useState(0);
@@ -141,7 +148,7 @@ function Comics() {
             setOffset(0); // reset off set when the user chooses a specific comic so that they get comics in order
             setInputQuery(comicToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a comic name ' onChange={e => setComicToSearch(e.target.value)} /> 
           </StyledForm>
         
