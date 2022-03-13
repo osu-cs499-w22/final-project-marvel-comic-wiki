@@ -41,7 +41,7 @@ export default function SeriesModal(props) {
 						:
 						<ul>
 							{props.creators.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}
@@ -58,7 +58,7 @@ export default function SeriesModal(props) {
 						:
 						<ul>
 							{props.comics.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}
@@ -75,7 +75,7 @@ export default function SeriesModal(props) {
 						:
 						<ul>
 							{props.characters.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}

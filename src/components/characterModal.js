@@ -41,7 +41,7 @@ export default function CharacterModal(props) {
 						:
 						<ul>
 							{props.events.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}
@@ -58,7 +58,7 @@ export default function CharacterModal(props) {
 						:
 						<ul>
 							{props.series.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}
@@ -75,7 +75,7 @@ export default function CharacterModal(props) {
 						:
 						<ul>
 							{props.comics.map(item => 
-								<li key={item.name}>{item.name}</li>
+								<li key={item.resourceURI}>{item.name}</li>
 							)}
 						</ul>
 					}

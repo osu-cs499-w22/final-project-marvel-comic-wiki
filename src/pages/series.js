@@ -87,6 +87,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`;
+
 function Series() {
 
   const [offset, setOffset] = useState(0);
@@ -99,7 +106,7 @@ function Series() {
         setUrl(baseUrl); // use base URL when user doesnt search for a specific series
       }
       else {        
-        setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific series
+        setUrl(`${baseUrl}titleStartsWith=${inputQuery}&`); // change URL when user searches for a specific series
       }
 
 
@@ -115,10 +122,6 @@ function Series() {
   const [ seriesEvents, setSeriesEvents ] = useState([]);
   const [ seriesToSearch, setSeriesToSearch] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
-  console.log(series);
-  console.log("url == ", url);
-  console.log("offset is == ", offset);
-  
   
   return (
     <div>
@@ -135,7 +138,7 @@ function Series() {
             setOffset(0); // reset off set when the user choses a specific series so that they get series in order
             setInputQuery(seriesToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a series name ' onChange={e => setSeriesToSearch(e.target.value)} /> 
           </StyledForm>
         

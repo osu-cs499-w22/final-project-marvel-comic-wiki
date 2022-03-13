@@ -87,6 +87,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`;
+
 function Creators() {
 
   const [offset, setOffset] = useState(0);
@@ -109,14 +116,9 @@ function Creators() {
   const [ creatorName, setCreatorName ] = useState('');
   const [ creatorStories, setCreatorStories ] = useState([]);
   const [ creatorComics, setCreatorComics ] = useState([]);
-  const [ creatorEvents, setCreatorEvents ] = useState([]);
   const [ creatorSeries, setCreatorSeries ] = useState([]);
   const [ creatorToSearch, setCreatorToSearch] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
-  console.log(creators);
-  console.log("url == ", url);
-  console.log("offset is == ", offset);
-  
   
   return (
     <div>
@@ -133,7 +135,7 @@ function Creators() {
             setOffset(0); // reset off set when the user choses a specific creator so that they get creators in order
             setInputQuery(creatorToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a creator name ' onChange={e => setCreatorToSearch(e.target.value)} /> 
           </StyledForm>
         
@@ -145,7 +147,6 @@ function Creators() {
                   setCreatorName(creator.firstName + " " + creator.lastName);
                   setCreatorStories(creator.stories.items);
                   setCreatorComics(creator.comics.items);
-                  setCreatorEvents(creator.events.items);
                   setCreatorSeries(creator.series.items);
                   setModalShow(true);
                 }}>
@@ -162,7 +163,6 @@ function Creators() {
             name={creatorName}
             stories ={creatorStories}
             comics={creatorComics}
-            events={creatorEvents}
             series={creatorSeries}
             show={modalShow} 
             onHide={() => setModalShow(false)} 

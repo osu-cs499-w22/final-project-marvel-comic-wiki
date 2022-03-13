@@ -122,10 +122,6 @@ function Characters() {
   const [ characterToSearch, setCharacterToSearch] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
  
-  console.log(characters);
-  console.log("url == ", url);
-  console.log("offset is == ", offset);
-  
   
   return (
     <div>

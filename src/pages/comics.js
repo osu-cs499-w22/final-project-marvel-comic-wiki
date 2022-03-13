@@ -87,6 +87,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledSearch = styled.button`
+  border:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+`;
+
 function Comics() {
 
   const [offset, setOffset] = useState(0);
@@ -115,9 +122,6 @@ function Comics() {
   const [ comicToSearch, setComicToSearch] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
  
-  console.log(comics);
-  console.log("url == ", url);
-  console.log("offset is == ", offset);
   
   
   return (
@@ -135,7 +139,7 @@ function Comics() {
             setOffset(0); // reset off set when the user chooses a specific comic so that they get comics in order
             setInputQuery(comicToSearch);
           }}>
-          <StyledIcon icon="search"/>
+          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a comic name ' onChange={e => setComicToSearch(e.target.value)} /> 
           </StyledForm>
         
