@@ -143,7 +143,7 @@ function Comics() {
             <StyledInput placeholder= 'Enter a comic name ' onChange={e => setComicToSearch(e.target.value)} /> 
           </StyledForm>
         
-          <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 row-cols-xxl-7 g-4">
             {comics.map(comic =>
               <Col className="d-flex" key={comic.id}>
                 <StyledCard onClick={() => {

@@ -144,7 +144,7 @@ function Series() {
             <StyledInput placeholder= 'Enter a series name ' onChange={e => setSeriesToSearch(e.target.value)} /> 
           </StyledForm>
         
-          <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 row-cols-xxl-7 g-4">
             {series.map(series =>
               <Col className="d-flex" key={series.id}>
                 <StyledCard onClick={() => {
