@@ -154,7 +154,7 @@ function Creators() {
                   setCreatorEvents(creator.events.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${creator.thumbnail.path}/portrait_uncanny.${creator.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${creator.thumbnail.path}/landscape_incredible.${creator.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     {creator.fullName.length > 40 ? 
                       <StyledLongCardTitle>{creator.fullName}</StyledLongCardTitle> 
@@ -178,8 +178,8 @@ function Creators() {
           />
           
           <StyledBtnsContainer>
-            <StyledButton variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
-            <StyledButton variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+            <StyledButton disabled={offset === 0} variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
+            <StyledButton disabled={creators.length < 20} variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
           </StyledBtnsContainer>
           
         </StyledContainer>

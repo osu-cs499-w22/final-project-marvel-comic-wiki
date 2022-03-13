@@ -181,8 +181,8 @@ function Comics() {
           />
           
           <StyledBtnsContainer>
-            <StyledButton variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
-            <StyledButton variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+            <StyledButton disabled={offset === 0} variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
+            <StyledButton disabled={events.length < 20} variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
           </StyledBtnsContainer>
           
         </StyledContainer>
