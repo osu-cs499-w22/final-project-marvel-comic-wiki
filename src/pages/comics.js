@@ -163,7 +163,7 @@ function Comics() {
           <ComicModal 
             title={comicTitle}
             description={comicDescription || "Not Available"}
-            comics={comicCreators}
+            creators={comicCreators}
             events={comicEvents}
             characters={comicCharacters}
             show={modalShow} 

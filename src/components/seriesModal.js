@@ -33,7 +33,7 @@ export default function SeriesModal(props) {
 		</Accordion>
 		
 		<Accordion flush>
-			<Accordion.Item eventKey="Events">
+			<Accordion.Item eventKey="Creators">
 				<Accordion.Header><h4>Creators</h4></Accordion.Header>
 				<Accordion.Body>
 					{(!props.creators.length) ? 
@@ -82,24 +82,6 @@ export default function SeriesModal(props) {
 				</Accordion.Body>
 			</Accordion.Item>
 		</Accordion>
-	
-
-        {/* <Accordion flush>
-			<Accordion.Item eventKey="Events">
-				<Accordion.Header><h4>Events</h4></Accordion.Header>
-				<Accordion.Body>
-					{(!props.events.length) ? 
-						<p>Not Available</p>
-						:
-						<ul>
-							{props.events.map(item => 
-								<li key={item.name}>{item.name}</li>
-							)}
-						</ul>
-					}
-				</Accordion.Body>
-			</Accordion.Item>
-		</Accordion> */}
 		
       </Modal.Body>
       

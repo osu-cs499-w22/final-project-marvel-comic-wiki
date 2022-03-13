@@ -57,8 +57,8 @@ export default function ComicModal(props) {
 		</Accordion>
 		
 		<Accordion flush>
-			<Accordion.Item eventKey="Charactors">
-				<Accordion.Header><h4>Charactors</h4></Accordion.Header>
+			<Accordion.Item eventKey="Characters">
+				<Accordion.Header><h4>Characters</h4></Accordion.Header>
 				<Accordion.Body>
 					{(!props.characters.length) ? 
 						<p>Not Available</p>
@@ -74,14 +74,14 @@ export default function ComicModal(props) {
 		</Accordion>
 		
 		<Accordion flush>
-			<Accordion.Item eventKey="Comics">
+			<Accordion.Item eventKey="Creators">
 				<Accordion.Header><h4>Creators</h4></Accordion.Header>
 				<Accordion.Body>
-					{(!props.comics.length) ? 
+					{(!props.creators.length) ? 
 						<p>Not Available</p>
 						:
 						<ul>
-							{props.comics.map(item => 
+							{props.creators.map(item => 
 								<li key={item.name}>{item.name}</li>
 							)}
 						</ul>

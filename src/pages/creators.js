@@ -87,7 +87,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-function Comics() {
+function Creators() {
 
   const [offset, setOffset] = useState(0);
   const baseUrl = `https://gateway.marvel.com/v1/public/creators?offset=${offset*20}&`; // marvel api gives creators in 20 creator chunks
@@ -181,4 +181,4 @@ function Comics() {
   )
 }
 
-export default Comics;
+export default Creators;
