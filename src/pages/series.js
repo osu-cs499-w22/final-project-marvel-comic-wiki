@@ -135,7 +135,7 @@ function Series() {
           
           <StyledForm onSubmit={(e) => {
             e.preventDefault();
-            setOffset(0); // reset off set when the user choses a specific series so that they get series in order
+            setOffset(0); // reset offset when the user choses a specific series so that they get series in order
             setInputQuery(seriesToSearch);
           }}>
           <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
