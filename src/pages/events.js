@@ -11,7 +11,6 @@ import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
-
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
@@ -99,19 +98,16 @@ function Comics() {
   const [offset, setOffset] = useState(0);
   const baseUrl = `https://gateway.marvel.com/v1/public/events?offset=${offset*20}&`; // marvel api gives events in 20 event chunks
   const [ inputQuery, setInputQuery] = useState('') 
-   const [ url, setUrl] = useState(baseUrl);
+  const [ url, setUrl] = useState(baseUrl);
 
   useEffect(()=>{ // changes the URL depending on what the user searched for
-      if(inputQuery === ''){
+      if (inputQuery === '') {
         setUrl(baseUrl); // use base URL when user doesnt search for a specific event
       }
       else {        
         setUrl(`${baseUrl}nameStartsWith=${inputQuery}&`); // change URL when user searches for a specific event
       }
-
-
     }, [inputQuery, offset])
-
 
   const [ events, loadingAll, errorAll ] = useMarvelSearch(url);
   const [ eventName, setEventName ] = useState('');
@@ -120,7 +116,7 @@ function Comics() {
   const [ eventComics, setEventComics ] = useState([]);
   const [ eventCreators, setEventCreators ] = useState([]);
   const [ eventSeries, setEventSeries ] = useState([]);
-  const [ eventToSearch, setEventToSearch] = useState(''); // used for the search bar
+  const [ eventToSearch, setEventToSearch ] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
   
   return (
@@ -155,7 +151,6 @@ function Comics() {
                   setEventSeries(event.series.items);
                   setModalShow(true);
                 }}>
-                
                   <img src={`${event.thumbnail.path}/standard_xlarge.${event.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     <StyledCardTitle>{event.title} </StyledCardTitle>
@@ -164,15 +159,16 @@ function Comics() {
               </Col>
             )}
           </Row>
+          
           <EventModal 
             title={eventName}
             description={eventDescription || "Not Available"}
-            characters ={eventCharacters}
+            characters={eventCharacters}
             comics={eventComics}
             creators={eventCreators}
             series={eventSeries}
-            show={modalShow} 
-            onHide={() => setModalShow(false)} 
+            show={modalShow}
+            onHide={() => setModalShow(false)}
           />
           
           <StyledBtnsContainer>
@@ -182,7 +178,9 @@ function Comics() {
           
         </StyledContainer>
       )}
+      
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
+      
       <Footer></Footer>
     </div>
   )

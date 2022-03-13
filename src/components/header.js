@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
 function Header() {
-	
 	return (
 		<Navbar bg="dark" expand="lg" variant="dark">
 			<Container fluid>

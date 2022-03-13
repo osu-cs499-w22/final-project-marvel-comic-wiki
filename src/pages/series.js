@@ -11,7 +11,6 @@ import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
-
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
@@ -101,17 +100,14 @@ function Series() {
   const [ inputQuery, setInputQuery] = useState('') 
    const [ url, setUrl] = useState(baseUrl);
 
-  useEffect(()=>{ // changes the URL depending on what the user searched for
-      if(inputQuery === ''){
+  useEffect(() => { // changes the URL depending on what the user searched for
+      if (inputQuery === '') {
         setUrl(baseUrl); // use base URL when user doesnt search for a specific series
       }
       else {        
         setUrl(`${baseUrl}titleStartsWith=${inputQuery}&`); // change URL when user searches for a specific series
       }
-
-
     }, [inputQuery, offset])
-
 
   const [ series, loadingAll, errorAll ] = useMarvelSearch(url);
   const [ seriesName, setSeriesName ] = useState('');
@@ -120,7 +116,7 @@ function Series() {
   const [ seriesComics, setSeriesComics ] = useState([]);
   const [ seriesCreators, setSeriesCreators ] = useState([]);
   const [ seriesEvents, setSeriesEvents ] = useState([]);
-  const [ seriesToSearch, setSeriesToSearch] = useState(''); // used for the search bar
+  const [ seriesToSearch, setSeriesToSearch ] = useState(''); // used for the search bar
   const [ modalShow, setModalShow ] = React.useState(false);
   
   return (
@@ -155,7 +151,6 @@ function Series() {
                   setSeriesEvents(series.events.items);
                   setModalShow(true);
                 }}>
-                
                   <img src={`${series.thumbnail.path}/standard_xlarge.${series.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
                     <StyledCardTitle>{series.title} </StyledCardTitle>
@@ -164,15 +159,16 @@ function Series() {
               </Col>
             )}
           </Row>
-          <SeriesModal 
+          
+          <SeriesModal
             title={seriesName}
             description={seriesDescription || "Not Available"}
             characters ={seriesCharacters}
             comics={seriesComics}
             creators={seriesCreators}
             events={seriesEvents}
-            show={modalShow} 
-            onHide={() => setModalShow(false)} 
+            show={modalShow}
+            onHide={() => setModalShow(false)}
           />
           
           <StyledBtnsContainer>
@@ -182,7 +178,9 @@ function Series() {
           
         </StyledContainer>
       )}
+      
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
+      
       <Footer></Footer>
     </div>
   )
