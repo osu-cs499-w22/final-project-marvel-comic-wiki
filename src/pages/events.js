@@ -47,6 +47,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -140,8 +146,7 @@ function Comics() {
         
           <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {events.map(event =>
-              
-              <Col key={event.id}>
+              <Col className="d-flex" key={event.id}>
                 <StyledCard onClick={() => {
                   setEventName(event.title);
                   setEventDescription(event.description);
@@ -151,9 +156,13 @@ function Comics() {
                   setEventSeries(event.series.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${event.thumbnail.path}/standard_xlarge.${event.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${event.thumbnail.path}/standard_fantastic.${event.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{event.title} </StyledCardTitle>
+                    {event.title.length > 40 ? 
+                      <StyledLongCardTitle>{event.title}</StyledLongCardTitle> 
+                      : 
+                      <StyledCardTitle>{event.title}</StyledCardTitle>
+                    }
                   </StyledCardBody>
                 </StyledCard>
               </Col>

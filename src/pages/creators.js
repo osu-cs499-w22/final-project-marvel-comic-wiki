@@ -47,6 +47,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -139,7 +145,7 @@ function Creators() {
         
           <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {creators.map(creator =>
-              <Col key={creator.id}>
+              <Col className="d-flex" key={creator.id}>
                 <StyledCard onClick={() => {
                   setCreatorName(creator.fullName);
                   setCreatorStories(creator.stories.items);
@@ -148,9 +154,13 @@ function Creators() {
                   setCreatorEvents(creator.events.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${creator.thumbnail.path}/standard_xlarge.${creator.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${creator.thumbnail.path}/portrait_uncanny.${creator.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{creator.fullName}</StyledCardTitle>
+                    {creator.fullName.length > 40 ? 
+                      <StyledLongCardTitle>{creator.fullName}</StyledLongCardTitle> 
+                      : 
+                      <StyledCardTitle>{creator.fullName}</StyledCardTitle>
+                    }
                   </StyledCardBody>
                 </StyledCard>
               </Col>

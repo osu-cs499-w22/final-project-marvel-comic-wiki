@@ -47,6 +47,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -140,8 +146,7 @@ function Series() {
         
           <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {series.map(series =>
-              
-              <Col key={series.id}>
+              <Col className="d-flex" key={series.id}>
                 <StyledCard onClick={() => {
                   setSeriesName(series.title);
                   setSeriesDescription(series.description);
@@ -151,9 +156,13 @@ function Series() {
                   setSeriesEvents(series.events.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${series.thumbnail.path}/standard_xlarge.${series.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${series.thumbnail.path}/standard_fantastic.${series.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{series.title} </StyledCardTitle>
+                    {series.title.length > 40 ? 
+                      <StyledLongCardTitle>{series.title}</StyledLongCardTitle> 
+                      : 
+                      <StyledCardTitle>{series.title}</StyledCardTitle>
+                    }
                   </StyledCardBody>
                 </StyledCard>
               </Col>

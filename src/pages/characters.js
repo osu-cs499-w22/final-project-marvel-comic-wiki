@@ -47,6 +47,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -91,7 +97,7 @@ const StyledSearch = styled.button`
   background-color: Transparent;
   background-repeat:no-repeat;
   border: none;
-`
+`;
 
 function Characters() {
   
@@ -139,7 +145,7 @@ function Characters() {
         
           <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {characters.map(character =>
-              <Col key={character.id}>
+              <Col className="d-flex" key={character.id}>
                 <StyledCard onClick={() => {
                   setCharacterName(character.name);
                   setCharacterDescription(character.description);
@@ -148,9 +154,13 @@ function Characters() {
                   setCharacterSeries(character.series.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{character.name}</StyledCardTitle>
+                    {character.name.length > 40 ? 
+                      <StyledLongCardTitle>{character.name}</StyledLongCardTitle> 
+                      : 
+                      <StyledCardTitle>{character.name}</StyledCardTitle>
+                    }
                   </StyledCardBody>
                 </StyledCard>
               </Col>

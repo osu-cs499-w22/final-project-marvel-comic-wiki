@@ -47,6 +47,12 @@ const StyledCardTitle = styled(Card.Title)`
   padding-bottom: 5px;
 `;
 
+const StyledLongCardTitle = styled(Card.Title)`
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 0.97rem;
+`;
+
 const StyledForm = styled.form`
   text-align: right;
   padding-right: 5px;
@@ -139,7 +145,7 @@ function Comics() {
         
           <Row className="row-cols-2 row-cols-md-4 row-cols-xl-6 g-4">
             {comics.map(comic =>
-              <Col key={comic.id}>
+              <Col className="d-flex" key={comic.id}>
                 <StyledCard onClick={() => {
                   setComicTitle(comic.title);
                   setComicDescription(comic.description);
@@ -148,9 +154,13 @@ function Comics() {
                   setComicCharacters(comic.characters.items);
                   setModalShow(true);
                 }}>
-                  <img src={`${comic.thumbnail.path}/standard_xlarge.${comic.thumbnail.extension}`}className="card-img-top"alt=""></img>
+                  <img src={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}className="card-img-top"alt=""></img>
                   <StyledCardBody>
-                    <StyledCardTitle>{comic.title}</StyledCardTitle>
+                    {comic.title.length > 40 ? 
+                      <StyledLongCardTitle>{comic.title}</StyledLongCardTitle> 
+                      : 
+                      <StyledCardTitle>{comic.title}</StyledCardTitle>
+                    }
                   </StyledCardBody>
                 </StyledCard>
               </Col>
