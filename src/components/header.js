@@ -27,7 +27,7 @@ const StyledIcon = styled(MDBIcon)`
 	&:hover {
     	cursor: pointer;
 	}
-	filter: ${props => props.theme ? 'hue-rotate(0deg) saturate(0) brightness(1)' : 'hue-rotate(350deg) saturate(100) brightness(1)'}
+	filter: ${props => props.theme ? 'hue-rotate(350deg) saturate(100) brightness(1)' : 'hue-rotate(0deg) saturate(1) brightness(1)'}
 `;
 
 const StyledNavbarToggle = styled(Navbar.Toggle)`

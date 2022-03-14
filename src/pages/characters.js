@@ -30,6 +30,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledCard = styled(Card)`
+  border: 1px solid rgba(0, 0, 0, 0.2);
   &:hover {
     transform: scale(1.05);
   }
@@ -142,10 +143,10 @@ function Characters() {
             <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
             <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
           </StyledForm>
-        
-          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-4">
+         
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
             {characters.map(character =>
-              <Col className="d-flex" key={character.id}>
+              <Col key={character.id}>
                 <StyledCard onClick={() => {
                   setCharacterName(character.name);
                   setCharacterDescription(character.description);

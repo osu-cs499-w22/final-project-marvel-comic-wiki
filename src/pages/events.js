@@ -30,6 +30,7 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledCard = styled(Card)`
+  border: 1px solid rgba(0, 0, 0, 0.2);
   &:hover {
     transform: scale(1.05);
   }
@@ -144,9 +145,9 @@ function Comics() {
             <StyledInput placeholder= 'Enter an event name ' onChange={e => setEventToSearch(e.target.value)} /> 
           </StyledForm>
         
-          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-4">
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
             {events.map(event =>
-              <Col className="d-flex" key={event.id}>
+              <Col key={event.id}>
                 <StyledCard onClick={() => {
                   setEventName(event.title);
                   setEventDescription(event.description);
