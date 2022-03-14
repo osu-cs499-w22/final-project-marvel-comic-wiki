@@ -11,6 +11,10 @@ import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
+const PageContainer = styled.div`
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
@@ -18,6 +22,7 @@ const Title = styled.h1`
   @media (max-width: 700px) {
     margin-bottom: 0px;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const Loading = styled.div`
@@ -27,6 +32,7 @@ const Loading = styled.div`
 
 const StyledContainer = styled(Container)`
   max-width: 95%;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCard = styled(Card)`
@@ -41,17 +47,20 @@ const StyledCardBody = styled(Card.Body)`
   flex-direction: column;
   justify-content: center;
   min-height: 100px;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledLongCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
   font-size: 0.97rem;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledForm = styled.form`
@@ -70,6 +79,8 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledIcon = styled(MDBIcon)`
@@ -86,10 +97,17 @@ const StyledButton = styled(Button)`
   margin-right: 10px;
   margin-left: 10px;
   border: 1px solid;
-  border-color: rgba(0, 0, 0, .125);
   &:hover {
     border-color: rgba(0, 0, 0, .125);
     background-color: #efefef;
+  }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181E1F'};
+  border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
+  &:disabled {
+    color: ${props => props.theme ? 'black' : '#E8E6E3'};
+    background: ${props => props.theme ? 'white' : '#181E1F'};
+    border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
   }
 `;
 
@@ -101,6 +119,8 @@ const StyledSearch = styled.button`
 `;
 
 function Characters() {
+  
+  const [ themeMode, setThemeMode ] = React.useState(true);
   
   const [ offset, setOffset ] = useState(0);
   const baseUrl = `https://gateway.marvel.com/v1/public/characters?offset=${offset*20}&`; // marvel api gives characters in 20 character chunks
@@ -126,14 +146,14 @@ function Characters() {
   const [ modalShow, setModalShow ] = React.useState(false);
  
   return (
-    <div>
-	  <Header></Header>
+    <PageContainer theme={themeMode}>
+	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
 
-      <Title>Characters</Title>
+      <Title theme={themeMode}>Characters</Title>
       
       {loadingAll ? ( <Loading> <Spinner /> </Loading> ) : (
         
-        <StyledContainer>
+        <StyledContainer theme={themeMode}>
           
           <StyledForm onSubmit={(e) => {
             e.preventDefault();
@@ -141,7 +161,7 @@ function Characters() {
             setInputQuery(characterToSearch);
           }}>
             <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
-            <StyledInput placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
+            <StyledInput theme={themeMode} placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
           </StyledForm>
          
           <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
@@ -156,11 +176,11 @@ function Characters() {
                   setModalShow(true);
                 }}>
                   <img src={`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`}className="card-img-top"alt=""></img>
-                  <StyledCardBody>
+                  <StyledCardBody theme={themeMode}>
                     {character.name.length > 40 ? 
-                      <StyledLongCardTitle>{character.name}</StyledLongCardTitle> 
+                      <StyledLongCardTitle theme={themeMode}>{character.name}</StyledLongCardTitle> 
                       : 
-                      <StyledCardTitle>{character.name}</StyledCardTitle>
+                      <StyledCardTitle theme={themeMode}>{character.name}</StyledCardTitle>
                     }
                   </StyledCardBody>
                 </StyledCard>
@@ -168,7 +188,8 @@ function Characters() {
             )}
           </Row>
           
-          <CharacterModal 
+          <CharacterModal
+            theme={themeMode}
             name={characterName}
             description={characterDescription || "Not Available"}
             comics={characterComics}
@@ -179,8 +200,25 @@ function Characters() {
           />
           
           <StyledBtnsContainer>
-            <StyledButton disabled={offset === 0} variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
-            <StyledButton disabled={characters.length < 20} variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+            
+            <StyledButton 
+              theme={themeMode}
+              disabled={offset === 0}
+              variant="light"
+              onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}
+            >
+              &lt; Previous
+            </StyledButton>
+            
+            <StyledButton
+              theme={themeMode}
+              disabled={characters.length < 20}
+              variant="light"
+              onClick={() => setOffset(offset + 1)}
+            >
+              Next &gt;
+            </StyledButton>
+            
           </StyledBtnsContainer>
           
         </StyledContainer>
@@ -189,7 +227,7 @@ function Characters() {
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       
       <Footer></Footer>
-    </div>
+    </PageContainer>
   )
 }
 

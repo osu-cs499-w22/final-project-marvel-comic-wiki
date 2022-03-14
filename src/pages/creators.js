@@ -11,6 +11,10 @@ import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
+const PageContainer = styled.div`
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
@@ -102,6 +106,8 @@ const StyledSearch = styled.button`
 
 function Creators() {
   
+  const [ themeMode, setThemeMode ] = React.useState(true);
+  
   const [offset, setOffset] = useState(0);
   const baseUrl = `https://gateway.marvel.com/v1/public/creators?offset=${offset*20}&`; // marvel api gives creators in 20 creator chunks
   const [ inputQuery, setInputQuery] = useState('') 
@@ -127,7 +133,7 @@ function Creators() {
   
   return (
     <div>
-	  <Header></Header>
+	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
       
       <Title>Creators</Title>
       
