@@ -85,6 +85,7 @@ const StyledInput = styled.input`
 
 const StyledIcon = styled(MDBIcon)`
   margin-right: 5px;
+  filter: ${props => props.theme ? 'initial' : 'invert(0.85)'};
 `;
 
 const StyledBtnsContainer = styled.div`
@@ -160,7 +161,7 @@ function Characters() {
             setOffset(0); // reset off set when the user choses a specific character so that they get characters in order
             setInputQuery(characterToSearch);
           }}>
-            <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
+            <StyledSearch type="submit"><StyledIcon theme={themeMode} icon="search"/></StyledSearch>
             <StyledInput theme={themeMode} placeholder= 'Enter a character name ' onChange={e => setCharacterToSearch(e.target.value)} /> 
           </StyledForm>
          

@@ -22,6 +22,7 @@ const Title = styled.h1`
   @media (max-width: 700px) {
     margin-bottom: 0px;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const Loading = styled.div`
@@ -31,6 +32,7 @@ const Loading = styled.div`
 
 const StyledContainer = styled(Container)`
   max-width: 95%;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCard = styled(Card)`
@@ -45,17 +47,20 @@ const StyledCardBody = styled(Card.Body)`
   flex-direction: column;
   justify-content: center;
   min-height: 100px;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledLongCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
   font-size: 0.97rem;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledForm = styled.form`
@@ -74,10 +79,13 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledIcon = styled(MDBIcon)`
   margin-right: 5px;
+  filter: ${props => props.theme ? 'initial' : 'invert(0.85)'};
 `;
 
 const StyledBtnsContainer = styled.div`
@@ -90,10 +98,17 @@ const StyledButton = styled(Button)`
   margin-right: 10px;
   margin-left: 10px;
   border: 1px solid;
-  border-color: rgba(0, 0, 0, .125);
   &:hover {
     border-color: rgba(0, 0, 0, .125);
     background-color: #efefef;
+  }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181E1F'};
+  border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
+  &:disabled {
+    color: ${props => props.theme ? 'black' : '#E8E6E3'};
+    background: ${props => props.theme ? 'white' : '#181E1F'};
+    border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
   }
 `;
 
@@ -132,22 +147,22 @@ function Creators() {
   const [ modalShow, setModalShow ] = React.useState(false);
   
   return (
-    <div>
+    <PageContainer theme={themeMode}>
 	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
       
-      <Title>Creators</Title>
+      <Title theme={themeMode}>Creators</Title>
       
       {loadingAll ? ( <Loading> <Spinner /> </Loading> ) : (
         
-        <StyledContainer>
+        <StyledContainer theme={themeMode}>
           
           <StyledForm onSubmit={(e) => {
             e.preventDefault();
             setOffset(0); // reset off set when the user choses a specific creator so that they get creators in order
             setInputQuery(creatorToSearch);
           }}>
-            <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
-            <StyledInput placeholder= 'Enter a creator name ' onChange={e => setCreatorToSearch(e.target.value)} /> 
+            <StyledSearch type="submit"><StyledIcon theme={themeMode} icon="search"/></StyledSearch>
+            <StyledInput theme={themeMode} placeholder= 'Enter a creator name ' onChange={e => setCreatorToSearch(e.target.value)} /> 
           </StyledForm>
         
           <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
@@ -162,11 +177,11 @@ function Creators() {
                   setModalShow(true);
                 }}>
                   <img src={`${creator.thumbnail.path}/landscape_incredible.${creator.thumbnail.extension}`}className="card-img-top"alt=""></img>
-                  <StyledCardBody>
+                  <StyledCardBody theme={themeMode}>
                     {creator.fullName.length > 40 ? 
-                      <StyledLongCardTitle>{creator.fullName}</StyledLongCardTitle> 
+                      <StyledLongCardTitle theme={themeMode}>{creator.fullName}</StyledLongCardTitle> 
                       : 
-                      <StyledCardTitle>{creator.fullName}</StyledCardTitle>
+                      <StyledCardTitle theme={themeMode}>{creator.fullName}</StyledCardTitle>
                     }
                   </StyledCardBody>
                 </StyledCard>
@@ -185,8 +200,25 @@ function Creators() {
           />
           
           <StyledBtnsContainer>
-            <StyledButton disabled={offset === 0} variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
-            <StyledButton disabled={creators.length < 20} variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+          
+            <StyledButton 
+              theme={themeMode}
+              disabled={offset === 0}
+              variant="light"
+              onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}
+            >
+              &lt; Previous
+            </StyledButton>
+            
+            <StyledButton
+              theme={themeMode}
+              disabled={creators.length < 20}
+              variant="light"
+              onClick={() => setOffset(offset + 1)}
+            >
+              Next &gt;
+            </StyledButton>
+            
           </StyledBtnsContainer>
           
         </StyledContainer>
@@ -195,7 +227,7 @@ function Creators() {
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       
       <Footer></Footer>
-    </div>
+    </PageContainer>
   )
 }
 
