@@ -192,6 +192,7 @@ function Series() {
           </Row>
           
           <SeriesModal
+            theme={themeMode}
             title={seriesName}
             description={seriesDescription || "Not Available"}
             characters ={seriesCharacters}

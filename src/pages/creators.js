@@ -190,6 +190,7 @@ function Creators() {
           </Row>
           
           <CreatorModal 
+            theme={themeMode}
             name={creatorName}
             stories={creatorStories}
             comics={creatorComics}

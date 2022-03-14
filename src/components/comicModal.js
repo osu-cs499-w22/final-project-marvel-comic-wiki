@@ -1,6 +1,36 @@
 import { Modal, Button, Accordion } from 'react-bootstrap';
 import styled from '@emotion/styled/macro';
 
+const StyledModalHeader = styled(Modal.Header)`
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+  & .btn-close {
+    filter: ${props => props.theme ? 'initial' : 'invert(1)'};
+  };
+`;
+
+const StyledModalBody = styled(Modal.Body)`
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
+const StyledModalFooter = styled(Modal.Footer)`
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
+const StyledAccordionItem = styled(Accordion.Item)`
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+  & .accordion-button {
+    color: ${props => props.theme ? 'black' : '#E8E6E3'};
+    background: ${props => props.theme ? 'white' : '#181E1F'};
+  };
+  & .accordion-button::after {
+    filter: ${props => props.theme ? 'initial' : 'invert(1)'};
+  };
+`;
+
 const StyledModalTitle = styled(Modal.Title)`
 	padding-left: 20px;
 `;
@@ -15,25 +45,25 @@ export default function ComicModal(props) {
 			scrollable={true}
 		>
 		
-			<Modal.Header closeButton>
+			<StyledModalHeader theme={props.theme} closeButton>
 				<StyledModalTitle id="contained-modal-title-vcenter">
 					{props.title}
 				</StyledModalTitle>
-			</Modal.Header>
+			</StyledModalHeader>
 			
-			<Modal.Body>
+			<StyledModalBody theme={props.theme}>
 			
 				<Accordion flush>
-					<Accordion.Item eventKey="Description">
+					<StyledAccordionItem theme={props.theme} eventKey="Description">
 						<Accordion.Header><h4>Description</h4></Accordion.Header>
 						<Accordion.Body>
 							<p>{props.description}</p>
 						</Accordion.Body>
-					</Accordion.Item>
+					</StyledAccordionItem>
 				</Accordion>
 			
 				<Accordion flush>
-					<Accordion.Item eventKey="Characters">
+					<StyledAccordionItem theme={props.theme} eventKey="Characters">
 						<Accordion.Header><h4>Characters</h4></Accordion.Header>
 						<Accordion.Body>
 							{(!props.characters.length) ? 
@@ -46,11 +76,11 @@ export default function ComicModal(props) {
 								</ul>
 							}
 						</Accordion.Body>
-					</Accordion.Item>
+					</StyledAccordionItem>
 				</Accordion>
 			
 				<Accordion flush>
-					<Accordion.Item eventKey="Creators">
+					<StyledAccordionItem theme={props.theme} eventKey="Creators">
 						<Accordion.Header><h4>Creators</h4></Accordion.Header>
 						<Accordion.Body>
 							{(!props.creators.length) ? 
@@ -63,11 +93,11 @@ export default function ComicModal(props) {
 								</ul>
 							}
 						</Accordion.Body>
-					</Accordion.Item>
+					</StyledAccordionItem>
 				</Accordion>
 			
 				<Accordion flush>
-					<Accordion.Item eventKey="Events">
+					<StyledAccordionItem theme={props.theme} eventKey="Events">
 						<Accordion.Header><h4>Events</h4></Accordion.Header>
 						<Accordion.Body>
 							{(!props.events.length) ? 
@@ -80,14 +110,14 @@ export default function ComicModal(props) {
 								</ul>
 							}
 						</Accordion.Body>
-					</Accordion.Item>
+					</StyledAccordionItem>
 				</Accordion>
 			
-			</Modal.Body>
+			</StyledModalBody>
 		  
-			<Modal.Footer>
+			<StyledModalFooter theme={props.theme}>
 				<Button onClick={props.onHide}>Close</Button>
-			</Modal.Footer>
+			</StyledModalFooter>
 		
 		</Modal>
 	);

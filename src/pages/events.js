@@ -192,6 +192,7 @@ function Comics() {
           </Row>
           
           <EventModal 
+            theme={themeMode}
             title={eventName}
             description={eventDescription || "Not Available"}
             characters={eventCharacters}
