@@ -11,6 +11,10 @@ import styled from '@emotion/styled/macro';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
+const PageContainer = styled.div`
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
@@ -18,6 +22,7 @@ const Title = styled.h1`
   @media (max-width: 700px) {
     margin-bottom: 0px;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const Loading = styled.div`
@@ -27,9 +32,11 @@ const Loading = styled.div`
 
 const StyledContainer = styled(Container)`
   max-width: 95%;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCard = styled(Card)`
+  border: 1px solid rgba(0, 0, 0, 0.2);
   &:hover {
     transform: scale(1.05);
   }
@@ -40,17 +47,20 @@ const StyledCardBody = styled(Card.Body)`
   flex-direction: column;
   justify-content: center;
   min-height: 100px;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledLongCardTitle = styled(Card.Title)`
   text-align: center;
   padding-bottom: 5px;
   font-size: 0.97rem;
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
 `;
 
 const StyledForm = styled.form`
@@ -69,10 +79,13 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const StyledIcon = styled(MDBIcon)`
   margin-right: 5px;
+  filter: ${props => props.theme ? 'initial' : 'invert(0.85)'};
 `;
 
 const StyledBtnsContainer = styled.div`
@@ -85,10 +98,17 @@ const StyledButton = styled(Button)`
   margin-right: 10px;
   margin-left: 10px;
   border: 1px solid;
-  border-color: rgba(0, 0, 0, .125);
   &:hover {
     border-color: rgba(0, 0, 0, .125);
     background-color: #efefef;
+  }
+  color: ${props => props.theme ? 'black' : '#E8E6E3'};
+  background: ${props => props.theme ? 'white' : '#181E1F'};
+  border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
+  &:disabled {
+    color: ${props => props.theme ? 'black' : '#E8E6E3'};
+    background: ${props => props.theme ? 'white' : '#181E1F'};
+    border-color: ${props => props.theme ? 'rgba(0, 0, 0, .125);' : '#8C8273'};
   }
 `;
 
@@ -100,6 +120,8 @@ const StyledSearch = styled.button`
 `;
 
 function Series() {
+
+  const [ themeMode, setThemeMode ] = React.useState(true);
 
   const [offset, setOffset] = useState(0);
   const baseUrl = `https://gateway.marvel.com/v1/public/series?offset=${offset*20}&`; // marvel api gives series in 20 series chunks
@@ -126,27 +148,27 @@ function Series() {
   const [ modalShow, setModalShow ] = React.useState(false);
   
   return (
-    <div>
-	  <Header></Header>
+    <PageContainer theme={themeMode}>
+	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
       
-      <Title>Series</Title>
+      <Title theme={themeMode}>Series</Title>
       
       {loadingAll ? ( <Loading> <Spinner /> </Loading> ) : (
         
-        <StyledContainer>
+        <StyledContainer theme={themeMode}>
           
           <StyledForm onSubmit={(e) => {
             e.preventDefault();
             setOffset(0); // reset offset when the user choses a specific series so that they get series in order
             setInputQuery(seriesToSearch);
           }}>
-          <StyledSearch type="submit"><StyledIcon icon="search"/></StyledSearch>
-            <StyledInput placeholder= 'Enter a series name ' onChange={e => setSeriesToSearch(e.target.value)} /> 
+          <StyledSearch type="submit"><StyledIcon theme={themeMode} theme={themeMode} icon="search"/></StyledSearch>
+            <StyledInput theme={themeMode} placeholder= 'Enter a series name ' onChange={e => setSeriesToSearch(e.target.value)} /> 
           </StyledForm>
         
-          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-4">
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
             {series.map(series =>
-              <Col className="d-flex" key={series.id}>
+              <Col key={series.id}>
                 <StyledCard onClick={() => {
                   setSeriesName(series.title);
                   setSeriesDescription(series.description);
@@ -157,11 +179,11 @@ function Series() {
                   setModalShow(true);
                 }}>
                   <img src={`${series.thumbnail.path}/standard_fantastic.${series.thumbnail.extension}`}className="card-img-top"alt=""></img>
-                  <StyledCardBody>
+                  <StyledCardBody theme={themeMode}>
                     {series.title.length > 40 ? 
-                      <StyledLongCardTitle>{series.title}</StyledLongCardTitle> 
+                      <StyledLongCardTitle theme={themeMode}>{series.title}</StyledLongCardTitle> 
                       : 
-                      <StyledCardTitle>{series.title}</StyledCardTitle>
+                      <StyledCardTitle theme={themeMode}>{series.title}</StyledCardTitle>
                     }
                   </StyledCardBody>
                 </StyledCard>
@@ -170,6 +192,7 @@ function Series() {
           </Row>
           
           <SeriesModal
+            theme={themeMode}
             title={seriesName}
             description={seriesDescription || "Not Available"}
             characters ={seriesCharacters}
@@ -181,8 +204,25 @@ function Series() {
           />
           
           <StyledBtnsContainer>
-            <StyledButton disabled={offset === 0} variant="light" onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}>&lt; Previous</StyledButton>
-            <StyledButton disabled={series.length < 20} variant="light" onClick={() => setOffset(offset + 1)}>Next &gt;</StyledButton>
+          
+            <StyledButton 
+              theme={themeMode}
+              disabled={offset === 0}
+              variant="light"
+              onClick={() => offset !== 0 ? setOffset(offset - 1) : setOffset(offset)}
+            >
+              &lt; Previous
+            </StyledButton>
+            
+            <StyledButton
+              theme={themeMode}
+              disabled={series.length < 20}
+              variant="light"
+              onClick={() => setOffset(offset + 1)}
+            >
+              Next &gt;
+            </StyledButton>
+            
           </StyledBtnsContainer>
           
         </StyledContainer>
@@ -191,7 +231,7 @@ function Series() {
       {errorAll && <ErrorContainer>Error!</ErrorContainer>}
       
       <Footer></Footer>
-    </div>
+    </PageContainer>
   )
 }
 
