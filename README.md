@@ -29,3 +29,4 @@ This service retrieves data from Marvel's Developer API and provides the user wi
 - [x] Develop Creators Page
 - [x] Develop Events Page
 - [x] Develop Series Page
+- [x] Implement Theme Toggle
