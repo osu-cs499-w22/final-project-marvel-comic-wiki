@@ -5,9 +5,7 @@ import styled from '@emotion/styled/macro';
 
 const NavbarContainer = styled.div`
 	display: grid;
-	grid-template-areas:
-		"Brand Spacer Theme Toggle"
-		;
+	grid-template-areas: "Brand Spacer Theme Toggle";
 	grid-template-columns: auto calc(100vw - 320px) auto 55px;
 	align-items: center;
 	@media (min-width: 992px) {
@@ -27,7 +25,7 @@ const StyledIcon = styled(MDBIcon)`
 	&:hover {
     	cursor: pointer;
 	}
-	filter: ${props => props.theme ? 'hue-rotate(350deg) saturate(100) brightness(1)' : 'hue-rotate(0deg) saturate(1) brightness(1)'}
+	filter: ${props => props.theme ? 'hue-rotate(0deg) saturate(1) brightness(1)' : 'hue-rotate(350deg) saturate(100) brightness(1)'}
 `;
 
 const StyledNavbarToggle = styled(Navbar.Toggle)`
@@ -43,14 +41,10 @@ const Spacer = styled.div`
 	grid-area: Spacer;
 `;
 
-function Header() {
-	
-	const [ themeMode, setThemeMode ] = React.useState(false);
+function Header( {themeMode, setThemeMode} ) {
 	
 	function handleClick() {
-    	console.log("Clicked!");
     	setThemeMode(!themeMode);
-		console.log("theme: ", themeMode);
 	}
 	
 	return (

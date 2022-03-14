@@ -6,6 +6,7 @@ import styled from '@emotion/styled/macro';
 const Title = styled.h1`
   text-align: center;
   padding: 10px;
+  color: ${props => props.theme ? 'black' : '#D1CDC7'};
 `;
 
 const MarvelImage = styled.img`
@@ -18,6 +19,7 @@ const MarvelImage = styled.img`
 const Description = styled.h2`
   text-align: center;
   padding-top: 40px;
+  color: ${props => props.theme ? 'black' : '#D1CDC7'};
 `;
 
 const Information = styled.p`
@@ -25,12 +27,14 @@ const Information = styled.p`
   padding-top: 10px;
   padding-right: 5%;
   padding-left: 5%;
+  color: ${props => props.theme ? 'black' : '#D1CDC7'};
 `;
 
 const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: ${props => props.theme ? 'white' : '#181A1B'};
 `;
 
 const FooterContainer = styled.div`
@@ -40,11 +44,13 @@ const FooterContainer = styled.div`
 
 function Home() {
     
+  const [ themeMode, setThemeMode ] = React.useState(true);
+    
   return (
     <div>
-	  <Header></Header>
+	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
       
-      <BodyContainer>
+      <BodyContainer theme={themeMode}>
         <Title>Welcome to the Marvel Comic Wiki</Title>
         <MarvelImage src="https://wallpapercave.com/wp/wp1829345.jpg" alt="" width="50%"/>
         <Description>This is your one-stop shop for all Marvel related information.</Description>
