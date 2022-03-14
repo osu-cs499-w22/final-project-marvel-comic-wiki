@@ -3,9 +3,13 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import styled from '@emotion/styled/macro';
 
+const PageContainer = styled.div`
+  background: ${props => props.theme ? 'white' : '#181A1B'};
+`;
+
 const Title = styled.h1`
   text-align: center;
-  padding: 10px;
+  padding: 20px;
   color: ${props => props.theme ? 'black' : '#D1CDC7'};
 `;
 
@@ -47,20 +51,20 @@ function Home() {
   const [ themeMode, setThemeMode ] = React.useState(true);
     
   return (
-    <div>
+    <PageContainer theme={themeMode}>
 	  <Header themeMode={themeMode} setThemeMode={setThemeMode}></Header>
       
       <BodyContainer theme={themeMode}>
-        <Title>Welcome to the Marvel Comic Wiki</Title>
+        <Title theme={themeMode}>Welcome to the Marvel Comic Wiki</Title>
         <MarvelImage src="https://wallpapercave.com/wp/wp1829345.jpg" alt="" width="50%"/>
-        <Description>This is your one-stop shop for all Marvel related information.</Description>
-        <Information>Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in 1961, the year that the company launched The Fantastic Four and other superhero titles created by Stan Lee, Jack Kirby, Steve Ditko and many others. The Marvel brand, which had been used over the years, was solidified as the company's primary brand.</Information>
+        <Description theme={themeMode}>This is your one-stop shop for all Marvel related information.</Description>
+        <Information theme={themeMode}>Marvel was started in 1939 by Martin Goodman as Timely Comics, and by 1951 had generally become known as Atlas Comics. The Marvel era began in 1961, the year that the company launched The Fantastic Four and other superhero titles created by Stan Lee, Jack Kirby, Steve Ditko and many others. The Marvel brand, which had been used over the years, was solidified as the company's primary brand.</Information>
         
-        <Description>Features</Description>
-        <Information>View all characters, comics, creators, events, or series within the Marvel Universe.</Information>
-        <Information>Search for a character, comic, creator, event, or series by their name or title.</Information>
-        <Information>Search for a group of characters, comics, creators, events, or series by their name or title.</Information>
-        <Information>View detailed descriptions of characters, comics, creators, events, or series, along with related work.</Information>
+        <Description theme={themeMode}>Features</Description>
+        <Information theme={themeMode}>View all characters, comics, creators, events, or series within the Marvel Universe.</Information>
+        <Information theme={themeMode}>Search for a character, comic, creator, event, or series by their name or title.</Information>
+        <Information theme={themeMode}>Search for a group of characters, comics, creators, events, or series by their name or title.</Information>
+        <Information theme={themeMode}>View detailed descriptions of characters, comics, creators, events, or series, along with related work.</Information>
       
       </BodyContainer>
       
@@ -68,7 +72,7 @@ function Home() {
         <Footer></Footer>
       </FooterContainer>
       
-	</div>
+	</PageContainer>
   );
 }
 
