@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 import styled from '@emotion/styled/macro';
@@ -46,6 +46,15 @@ function Header( {themeMode, setThemeMode} ) {
 	function handleClick() {
     	setThemeMode(!themeMode);
 	}
+	
+	// Persist current theme toggle through local storage
+	useEffect(() => {
+		setThemeMode(JSON.parse(window.localStorage.getItem('themeMode')));
+	}, []);
+	
+	useEffect(() => {
+		window.localStorage.setItem('themeMode', themeMode);
+	}, [themeMode]);
 	
 	return (
 		<Navbar bg="dark" expand="lg" variant="dark">
